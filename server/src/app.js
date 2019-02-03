@@ -1,8 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-
-
+const multer = require('multer');
+const mongoose = require('mongoose');
+const Grid = require('gridfs-stream');
+const GridFsStorage = require('multer-gridfs-storage');
+const path = require('path');
 
 
 
@@ -19,8 +22,54 @@ app.use(cors());
 
 
 
+
+
+// MONGODB AND CONNECTIONS WITH GRID 
+const {MongoURI} = require('./config/keys');
+
+// Connecting
+mongoose.connect(MongoURI, { useNewUrlParser: true })
+    .then(()=> console.log('CONNECTED TO DATABASE')) 
+    .catch(err => console.log(err));
+const db = mongoose.connection;
+
+
+// "Once our connection opens, our callback will be called"
+let gfs;
+db.once('open', ()=> {
+    gfs = Grid(db ,mongoose.mongo)
+    gfs.collection('uploads')
+})
+
+
+// Create a store engine
+const storage = new GridFsStorage({
+    url: MongoURI,
+    file: (req, file) => {
+      return new Promise((resolve, reject) => {
+          const filename = file.originalname;
+          const fileInfo = {
+            filename: filename,
+            bucketName: 'uploads'
+          };
+          resolve(fileInfo);
+      });
+    }
+  });
+
+
+const upload = multer({storage});
+
 // ROUTES
-require('./routes')(app)
+// require('./routes')(app,upload)
+
+
+app.post('/upload', upload.single('file'), (req, res) => {
+    res.send({
+        message: 'all cool'
+    })
+  });
+
 
 // CONFIG
 const {port} = require('./config/config')
