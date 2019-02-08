@@ -1,11 +1,19 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+
+  <div id="app"> 
+    <v-app>
+        <!-- <v-flex > -->
+        <router-view/>
+     
+        <!-- </v-flex> -->
+     </v-app>
+        
   </div>
+
 </template>
 
 <script>
+
 export default {
   name: 'App'
 }
@@ -13,11 +21,18 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+   text-align: center;
+  height: 100vh; */
+  overflow: hidden;
 }
+
+.links a{
+  color:red;  
+  text-decoration: none;
+}
+
+
 </style>
