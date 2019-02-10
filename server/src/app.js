@@ -61,7 +61,7 @@ const storage = new GridFsStorage({
 const upload = multer({storage});
 
 // ROUTES
-// require('./routes')(app,upload)
+require('./routes')(app,upload)
 
 
 app.post('/upload', upload.single('file'), (req, res) => {

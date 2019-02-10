@@ -2,10 +2,7 @@
 
   <div id="app"> 
     <v-app>
-        <!-- <v-flex > -->
         <router-view/>
-     
-        <!-- </v-flex> -->
      </v-app>
         
   </div>

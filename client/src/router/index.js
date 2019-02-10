@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Front from '@/components/Front'
-import Create from '@/components/CreateSp'
+import Front from '@/components/Front.vue'
+import Create from '@/components/CreateSP.vue'
 
 Vue.use(Router)
 
