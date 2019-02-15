@@ -1,13 +1,17 @@
 import axios from 'axios';
-const getEndpoint = 'http://localhost:5000/';
+const getEndpoint = 'http://localhost:5000/snowparks';
 const postEndpoint = 'http://localhost:5000/add';
 
 class ApiHandle  {
 
-    static getSnowparks() {
+    static getSnowparks(param) {
         return new Promise(async (resolve,reject) => {
             try {
-                const res = await axios.get(getEndpoint);
+                const res = await axios.get(getEndpoint, {
+                    params: {
+                        param: param
+                    }
+                });
                 resolve(res.data)
             }
             catch(err) {
@@ -20,9 +24,7 @@ class ApiHandle  {
     static addSnowpark(snowpark) {
         return new Promise(async (resolve, reject)=> {
             try {
-               axios.post(postEndpoint, 
-                snowpark
-               ) 
+               axios.post(postEndpoint, snowpark) 
             }
             catch(err) {
                 console.log(err)

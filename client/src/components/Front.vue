@@ -1,40 +1,57 @@
 <template>
     <v-content >
       <v-container fill-height fluid>
-<!-- align-center -->
         <v-layout align-center justify-center>
 
 <!-- SHOW THAT CARD  -->
 
-<!-- TODO: TRANSITION GROUP WITH FOR LOOP AND KEY -->
-<!-- <transition-group name="slide-y-transition" tag="div"> -->
-          <v-slide-y-transition>
-            <v-card class="CenterCard" v-show="view">
+          <!-- <v-slide-y-transition>
 
-                  <v-img
-                    src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
-                    aspect-ratio="2.75"
-                  ></v-img>
+            <Snowparks v-show="view" 
+            :data="data" :view="view"/>
+          
 
-                  <v-card-title primary-title>
-                    <div>
-                      <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
-                      <p>Państwo, Miasto</p>
-                      <div>Located two hours south of Sydney in the Southern Highlands of New South Wales</div>
-                    </div>
-                  </v-card-title>
-
-                  <v-card-actions>
-                    <v-btn flat color="orange darken-4">View</v-btn>
-                      <v-btn flat color="orange">Site</v-btn>
-                  </v-card-actions>
-            </v-card>
+          </v-slide-y-transition> -->
 
 
+<!-- FILTER STUFF -->
+          <v-flex xs12 sm8 md4 >
+          
+          <v-toolbar id="main" color="white">
+
+            <v-btn icon v-on:click="addAnimation">
+              <v-icon>add </v-icon>
+            </v-btn>
+  
+            <v-text-field  name="search" label="Country, Town, Snowpark name.." type="text" v-model="searchInput"></v-text-field>
+    
+            <v-btn icon flat color="orange" v-on:click="searchFunction(animateSearch,getSnowparks)">
+              <v-icon>search</v-icon>
+            </v-btn>
+           
+            </v-toolbar>
+            
+            <v-slide-y-transition>
+          <h3 style="text-align: center; color:green" @click="hideMessage" v-show="messageShown">{{this.message}}</h3>
           </v-slide-y-transition>
-<!-- </transition-group> -->
 
-<!-- FORM FOR ADDING SNOWPARKS -->
+          <!-- CARD SHOW: START  -->
+            <v-slide-y-transition >
+              <!-- class="CenterCard" -->
+           
+            <Snowparks v-show="view" 
+            :data="data" :view="view"/>
+          
+         
+          </v-slide-y-transition>
+          <!-- CARD SHOW: END  -->
+          </v-flex>
+
+
+
+
+
+          <!-- FORM FOR ADDING SNOWPARKS -->
 <v-slide-y-transition>
   <v-card class="CenterCardAdd" v-show="viewForm">
     <v-card-title> <h1>Add a <span class="snowpark">Snowpark</span></h1></v-card-title>
@@ -67,26 +84,10 @@
     </v-card-actions>
   </v-card>
 </v-slide-y-transition>
-<!-- FILTER STUFF -->
-          <v-flex xs12 sm8 md4 >
-          
-          <v-toolbar id="main" color="white">
 
-            <v-btn icon v-on:click="addAnimation">
-              <v-icon>add </v-icon>
-            </v-btn>
-  
-            <v-text-field  name="search" label="Country, Town, Snowpark name.." type="text" v-model="searchInput"></v-text-field>
-    
-            <v-btn icon flat color="orange" v-on:click="searchFunction(animateSearch,getSnowparks)">
-              <v-icon>search</v-icon>
-            </v-btn>
-           
-            </v-toolbar>
-            <v-slide-y-transition>
-          <h3 style="text-align: center; color:green" @click="hideMessage" v-show="messageShown">{{this.message}}</h3>
-          </v-slide-y-transition>
-          </v-flex>
+ <!-- END FORM FOR ADDING SNOWPARKS -->
+
+
         </v-layout>
   
       
@@ -100,15 +101,16 @@
 </template>
 
 <script>
-// import test from './test'
 import ApiHandle from './ApiHandle.js'
+import Snowparks from './SnowParks.vue'
 export default {
   name: 'Front',
-  // components: {
-  //   test: test
-  // },
+  components: {
+    Snowparks: Snowparks
+  },
   data () {
     return {
+      data: {},
       form: false,
       toolbar: null,
       view: false,
@@ -127,7 +129,6 @@ export default {
   },
   mounted() {
     this.setToolbar();
-    // this.test()
   },
    methods: {
     setToolbar() {
@@ -147,23 +148,24 @@ export default {
       toolbar.style.setProperty("transform", "translateY(-40vh)");
       this.viewForm = false;
       this.view = true;
-      let vLayout = document.getElementsByClassName('layout')[0]
+      // let vLayout = document.getElementsByClassName('layout')[0]
       // TODO: TUTAJ WRZUCIĆ DANE, KTÓRE SIĘ WYŚWIETLĄ PO ANIMACJI
-      this.getSnowparks()
+      // this.getSnowparks()
     },
     searchFunction(animate, search) {
       animate()
       search();
     },
     async getSnowparks() {
-      const data = await ApiHandle.getSnowparks()
-      console.log(data)
-      this.data = data
-    },
-    test() {
-      // ApiHandle.getSnowparks()
+      this.messageShown = false;
+      const {searchInput} = this
+        const data = await ApiHandle.getSnowparks(searchInput)
+        this.data = data
+        console.log(this.data)
+
     },
     async addAnimation() {
+      this.messageShown = false;
       let {toolbar} = this;
       const time = '1.5s';
       
@@ -216,6 +218,7 @@ export default {
 .v-toolbar {
   border: none;
   box-shadow:none;
+
 }
 .v-card {
   border:none;
@@ -236,10 +239,10 @@ export default {
     z-index: 2;
     transform: translate(-50%);
 }
-
 .snowpark {
   color:orange
 }
+
 @keyframes moveUp {
   0% {
     transform: translateY(0)

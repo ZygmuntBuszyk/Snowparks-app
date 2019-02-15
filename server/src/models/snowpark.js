@@ -14,5 +14,5 @@ const snowparksSchema = new mongoose.Schema({
     }
 })
 
-const Snowpark = mongoose.model('Snowpark', snowparksSchema)
+const Snowpark = mongoose.model('Snowpark', snowparksSchema);
 module.exports = Snowpark;
