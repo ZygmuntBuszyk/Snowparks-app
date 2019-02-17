@@ -1,17 +1,18 @@
 <template>
  <v-card>
-
+                  
                   <v-img
                     src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
                     aspect-ratio="2.75"
+                    
                   ></v-img>
-
+                  
                   <v-card-title primary-title>
                     <div>
                       <h3 class="headline mb-0">{{snowpark.name}}</h3>
                       <p>{{snowpark.country}}, {{snowpark.city}}</p>
                       <!-- <div>{{data}}</div> -->
-                      <div>{{park}}</div>
+                      <div><p>{{snowpark.description}}</p></div>
                       
                     </div>
                   </v-card-title>
@@ -30,9 +31,14 @@ export default {
   name: 'Onepark',
   data () {
     return {
-      snowpark: this.$attrs.snowpark,
-      park: `snowpark/${this.$attrs.snowpark._id}`
+      snowpark: this.$attrs.snowpark
     }
+  },
+  mounted() {
+    // this.snowpark.description 
+    const desc =  this.snowpark.description.substring(0, 50);
+    console.log(desc)
+    this.snowpark.description = desc.concat(' [...]');
   },
   methods: {
     test(){

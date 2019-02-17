@@ -68,7 +68,7 @@
         </v-text-field>
         <v-text-field :rules="[rules.required]" label="Image Url" v-model="inputData.image">
         </v-text-field>
-        <v-textarea :rules="[rules.required, rules.length(125)]" label="description" v-model="inputData.description">
+        <v-textarea :rules="[rules.required, rules.length(250)]" label="description" v-model="inputData.description">
         </v-textarea>
       </v-form>
        <!-- <v-divider></v-divider> -->
@@ -145,12 +145,10 @@ export default {
       }, 1050)
     },
     afterSearchAnimation(toolbar) {
-      toolbar.style.setProperty("transform", "translateY(-40vh)");
+      toolbar.style.setProperty("transform", "translateY(0)");
+      toolbar.style.setProperty("top", "20px")  
       this.viewForm = false;
       this.view = true;
-      // let vLayout = document.getElementsByClassName('layout')[0]
-      // TODO: TUTAJ WRZUCIĆ DANE, KTÓRE SIĘ WYŚWIETLĄ PO ANIMACJI
-      // this.getSnowparks()
     },
     searchFunction(animate, search) {
       animate()
@@ -177,6 +175,7 @@ export default {
     },
     afterAddAnimation(toolbar) {
       toolbar.style.setProperty("transform", "translateY(-40vh)");
+      toolbar.style.setProperty("top", "20px")  
       this.view = false;
       this.viewForm = true;
       let vLayout = document.getElementsByClassName('layout')[0]
@@ -218,7 +217,7 @@ export default {
 .v-toolbar {
   border: none;
   box-shadow:none;
-
+  z-index: 99999;
 }
 .v-card {
   border:none;

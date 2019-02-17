@@ -1,6 +1,7 @@
 import axios from 'axios';
 const getEndpoint = 'http://localhost:5000/snowparks';
 const postEndpoint = 'http://localhost:5000/add';
+const getById = 'http://localhost:5000/snowparksId';
 
 class ApiHandle  {
 
@@ -32,6 +33,23 @@ class ApiHandle  {
             }
         })
         
+    }
+
+    static getSnowparkById(param) {
+        return new Promise(async (resolve,reject) => {
+            try {
+                const res = await axios.get(getById, {
+                    params: {
+                        param: param
+                    }
+                });
+                resolve(res.data)
+            }
+            catch(err) {
+                console.log(err);
+                reject(err)
+            }
+        })
     }
 
 

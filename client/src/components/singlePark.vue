@@ -8,9 +8,9 @@
     <li>description:{{snowpark.description}}</li>
     <li>name: {{snowpark.name}}</li>
     <li>website:{{snowpark.website}}</li>
-    <li>date:{{snowpark.date}}</li>
+    <li>date:{{snowpark.date}}</li> 
 </ul>
-    <p>  </p>
+<v-btn flat color="orange darken-4" router to="/">Back</v-btn>
 </div>     
 </template>
 
@@ -27,8 +27,11 @@ export default {
   },
   async mounted() {
       this.id = this.$route.params.id
-      const snowpark = await ApiHandle.getSnowparks(this.id)
-      this.snowpark = snowpark.snowparks[0]
+      const snowpark = await ApiHandle.getSnowparkById(this.id)
+      this.snowpark = snowpark.snowpark
+
+      const date =  this.snowpark.date.substring(0, 10);
+      this.snowpark.date = date;
   },
   methods: {
    
@@ -38,5 +41,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  li {
+   overflow-wrap: break-word; 
+  }
+  ul {
+    padding: 10em
+  }
 </style>
