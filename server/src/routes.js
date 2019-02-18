@@ -84,5 +84,14 @@ module.exports = (app, upload)=> {
                 snowpark
             })
         })
+    });
+    // SPECIAL ROUTE JUST FOR ME ..
+    app.get('/deleteAll', (req,res) => {
+        Snowpark.deleteMany({}, (err)=> {
+            if(err) throw err;
+        });
+        res.send({
+            message: 'You just deleted every single Snowpark in the database, good job buddy!'
+        })
     })
 }

@@ -145,8 +145,8 @@ export default {
       }, 1050)
     },
     afterSearchAnimation(toolbar) {
-      toolbar.style.setProperty("transform", "translateY(0)");
-      toolbar.style.setProperty("top", "20px")  
+      toolbar.style.setProperty("transform", "translateY(-40vh)");
+      // toolbar.style.setProperty("top", "20px")  
       this.viewForm = false;
       this.view = true;
     },
@@ -175,7 +175,7 @@ export default {
     },
     afterAddAnimation(toolbar) {
       toolbar.style.setProperty("transform", "translateY(-40vh)");
-      toolbar.style.setProperty("top", "20px")  
+      // toolbar.style.setProperty("top", "20px")  
       this.view = false;
       this.viewForm = true;
       let vLayout = document.getElementsByClassName('layout')[0]
@@ -237,6 +237,10 @@ export default {
     left: 50%;
     z-index: 2;
     transform: translate(-50%);
+}
+
+#main {
+
 }
 .snowpark {
   color:orange

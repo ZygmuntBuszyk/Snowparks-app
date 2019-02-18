@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Front from '@/components/Front.vue'
 import Create from '@/components/CreateSP.vue'
 import ViewSnowpark from '@/components/singlePark.vue'
+import test from '@/components/test.vue'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/snowpark/:id',
       name: 'snowpark',
       component: ViewSnowpark
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: test
     }
   ]
 })

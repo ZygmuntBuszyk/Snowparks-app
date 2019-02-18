@@ -2,7 +2,7 @@
  <v-card>
                   
                   <v-img
-                    src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+                    :src="snowpark.image"
                     aspect-ratio="2.75"
                     
                   ></v-img>
@@ -19,7 +19,7 @@
 
                   <v-card-actions>
                     <v-btn flat color="orange darken-4" :to="{name: 'snowpark', params:{id: snowpark._id}}">View</v-btn>
-                    <v-btn flat color="orange" @click="test">Site</v-btn>
+                    <v-btn flat color="orange" target="_blank">{{park}}</v-btn>
                     <!--   <v-btn flat color="orange darken-4" :to='park'>View</v-btn> -->
                   </v-card-actions>
             </v-card>
