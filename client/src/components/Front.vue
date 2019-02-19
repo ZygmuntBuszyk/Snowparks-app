@@ -15,9 +15,9 @@
 
 
 <!-- FILTER STUFF -->
-          <v-flex xs12 sm8 md4 >
+          <v-flex id="main" xs12 sm8 md4 >
           
-          <v-toolbar id="main" color="white">
+          <v-toolbar  color="white">
 
             <v-btn icon v-on:click="addAnimation">
               <v-icon>add </v-icon>
@@ -35,8 +35,12 @@
           <h3 style="text-align: center; color:green" @click="hideMessage" v-show="messageShown">{{this.message}}</h3>
           </v-slide-y-transition>
 
-          <!-- CARD SHOW: START  -->
-            <v-slide-y-transition >
+         
+          </v-flex>
+ <!-- CARD SHOW: START  -->
+           <v-flex  style="margin-top:15%" xs12 sm8 md4 > 
+             <!-- dac tu MARGIN-TOP: 15%  -->
+          <v-slide-y-transition >
               <!-- class="CenterCard" -->
            
             <Snowparks v-show="view" 
@@ -45,10 +49,8 @@
          
           </v-slide-y-transition>
           <!-- CARD SHOW: END  -->
-          </v-flex>
-
-
-
+  
+           </v-flex>
 
 
           <!-- FORM FOR ADDING SNOWPARKS -->
@@ -240,7 +242,8 @@ export default {
 }
 
 #main {
-
+    position: absolute;
+    width: 100%;
 }
 .snowpark {
   color:orange

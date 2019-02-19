@@ -55,19 +55,6 @@
       
     </v-flex>
   </v-layout>
-
-<!-- <ul>
-    <li>image:{{snowpark.image}}</li>
-    <li>mountain: {{snowpark.mountain}}</li>
-    <li>country:{{snowpark.country}} </li>
-    <li>city:{{snowpark.name}}</li>
-    <li>description:{{snowpark.description}}</li>
-    <li>name: {{snowpark.name}}</li>
-    <li>website:{{snowpark.website}}</li>
-    <li>date:{{snowpark.date}}</li> 
-</ul> -->
-
-    
 </template>
 
 <script>
