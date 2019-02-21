@@ -38,8 +38,9 @@
          
           </v-flex>
  <!-- CARD SHOW: START  -->
-           <v-flex  style="margin-top:15%" xs12 sm8 md4 > 
+           <v-flex  style="margin-top:8em" xs12 sm8 md4 > 
              <!-- dac tu MARGIN-TOP: 15%  -->
+             <!-- PROBLEM: TRANSLATE VH NA DYNAMICZNIE POWIEKSZAJACEJ SIE STRONIE -->
           <v-slide-y-transition >
               <!-- class="CenterCard" -->
            
@@ -140,14 +141,17 @@ export default {
       let {toolbar} = this;
       const time = '1.5s';
       
-      toolbar.style.setProperty("animation", `moveUp ${time}`)
+      // toolbar.style.setProperty("animation", `moveUp ${time}`)
+      document.getElementById('main').style.setProperty("animation", `testUp ${time}`)
 
       await setTimeout(() => {
         this.afterSearchAnimation(toolbar)
       }, 1050)
     },
     afterSearchAnimation(toolbar) {
-      toolbar.style.setProperty("transform", "translateY(-40vh)");
+      // toolbar.style.setProperty("transform", "translateY(-40vh)");
+      // document.getElementById('main').style.setProperty("top", "9%");
+      document.getElementById('main').style.setProperty("top", "5em");
       // toolbar.style.setProperty("top", "20px")  
       this.viewForm = false;
       this.view = true;
@@ -168,16 +172,18 @@ export default {
       this.messageShown = false;
       let {toolbar} = this;
       const time = '1.5s';
-      
-      toolbar.style.setProperty("animation", `moveUp ${time}`)
+      document.getElementById('main').style.setProperty("animation", `testUp ${time}`)
+      // toolbar.style.setProperty("animation", `moveUp ${time}`)
 
       await setTimeout(() => {
         this.afterAddAnimation(toolbar)
       }, 1050)
     },
     afterAddAnimation(toolbar) {
-      toolbar.style.setProperty("transform", "translateY(-40vh)");
-      // toolbar.style.setProperty("top", "20px")  
+      // toolbar.style.setProperty("transform", "translateY(-40vh)");
+      // toolbar.style.setProperty("top", "5em")  
+      document.getElementById('main').style.setProperty("top", "5em");
+      //  document.getElementById('main').style.setProperty("top", "9%");
       this.view = false;
       this.viewForm = true;
       let vLayout = document.getElementsByClassName('layout')[0]
@@ -188,10 +194,12 @@ export default {
       let {toolbar} = this;
       const time = '1.5s';
       
-      toolbar.style.setProperty("animation", `moveDown ${time}`)
+      // toolbar.style.setProperty("animation", `moveDown ${time}`)
+      document.getElementById('main').style.setProperty("animation", `testDown ${time}`)
 
       await setTimeout(() => {
-        toolbar.style.setProperty("transform", "translateY(0)");
+        // toolbar.style.setProperty("transform", "translateY(0)");
+         document.getElementById('main').style.setProperty("top", "40%");
         this.message = 'Snowpark was added, succesfully'
         this.messageShown = true;
       }, 1150)
@@ -280,4 +288,36 @@ export default {
   }
 }
 
+@keyframes testUp {
+  0% {
+    /* top: calc(50% - 64px) */
+    top: 46.6%;
+  }
+  60% {
+    top: 2em;
+  }
+  80%{
+    top: 7em;
+  }
+  100% {
+    /* top: 9%; */
+    top: 5em;
+  }
+}
+
+@keyframes testDown {
+  0% {
+    top: 5em;
+  }
+  20% {
+   top: 7em;
+   
+  }
+  60%{
+    top: 2em;
+  }
+  100% {
+   top: 46.6%;
+  }
+}
 </style>
